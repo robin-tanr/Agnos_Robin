@@ -1,39 +1,18 @@
-# Agnos Task 2 — Symptom Recommender
+# Agnos Task 2 — Symptom Recommender (TH/EN)
 
-Given a patient’s **sex, age** and **selected symptoms**, the model recommends the **next K symptoms** to ask/confirm.  
-Short list by design (default **K=3**) and each suggestion includes a **reason** (rule/CF).  
-**Scope:** triage assist only — **not** a diagnostic tool.
+Recommends the next **K** symptoms to ask/confirm from a patient’s **sex, age,** and **selected symptoms**. Short by design (**K=3**) with a brief reason per suggestion. *Triage assist only; not a diagnostic tool.*
 
----
+## What’s here
+- **Colab.ipynb** — end-to-end: load → normalize (TH/EN) → rules & item-CF → blend → evaluate → serve FastAPI.
+- **REPORT.md** — concise write-up (problem, data, methods, results, takeaways).
 
-## What’s in this repo
-- **Colab.ipynb** — end-to-end notebook: load → normalize (TH/EN) → build rules & item-CF → blend → evaluate → serve FastAPI (`/docs`, `/health`, `/recommend`).
-- **REPORT.md** — 2–3 pages with Problem → Data → Methods → Results → So-what → Risks/Next.
+## Run (Colab)
+1. Open **Colab.ipynb** and **Run all**.
+2. Place **AgnosDataset.csv** at the path printed by the notebook (or change `PROJ`).
+3. When you see “Uvicorn running on …:8000”, open **http://127.0.0.1:8000/docs**.
 
-> **Data** is not checked in. The notebook expects `AgnosDataset.csv`.
-
----
-
-## Run
-
-1. Open **Colab.ipynb** in Google Colab.
-2. Put **`AgnosDataset.csv`** at the path printed by the notebook (default `/content/drive/MyDrive/AgnosHealth/`).  
-   - The notebook also falls back to the repo folder; you can place the CSV next to the notebook.
-3. **Run all cells** until you see: `Uvicorn running on http://0.0.0.0:8000`.
-4. Open `http://127.0.0.1:8000/docs` (Swagger).  
-   - To share publicly, use one of the safe cells in the notebook:
-     - **ngrok** (set env var):
-       ```python
-       import os, getpass
-       os.environ["NGROK_AUTHTOKEN"] = getpass.getpass("Paste ngrok token: ")
-       ```.
-
----
-
-## API (FastAPI)
-
-- **GET `/health`** → `{"status":"ok","symptoms":150,"rules":36}` (typed response model).
-- **POST `/recommend`**  
-  Request:
+## Test (Swagger)
+- **GET `/health`** should return: `{"status":"ok","symptoms":150,"rules":36}`.
+- **POST `/recommend`** → click **Try it out** and use:
   ```json
-  {"age": int?, "sex": "M|F|U", "selected": ["symptom", "..."], "top_k": 3}
+  {"age":28,"sex":"F","selected":["ไอ","น้ำมูกไหล"],"top_k":3}
