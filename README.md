@@ -1,4 +1,3 @@
-# Agnos_Robin
 # Agnos Task 2 — Symptom Recommender
 
 Given a patient’s **sex, age** and **selected symptoms**, the model recommends the **next K symptoms** to ask/confirm.  
