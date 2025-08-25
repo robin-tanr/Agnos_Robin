@@ -88,10 +88,11 @@ Cold-start (no selections): use segment/global popularity.
 
 ## 6) Serving (FastAPI)
 
-- `GET /health` → `{"status":"ok","symptoms":150,"rules":36}` (typed response).  
-- `POST /recommend` → TH/EN accepted; returns normalized `input`, Top-K with `{symptom, score, why}`, plus disclaimer.  
-- `GET /app` mini UI; `/` redirects to `/docs`.  
-- Colab-friendly; can expose with ngrok (token via ENV) or Cloudflare Tunnel.
+- **Colab demo:** run the tunnel cell and open `<PUBLIC_URL>/docs`
+  (e.g., `https://xxxx.ngrok-free.app/docs`).
+- **Local run (optional):** `http://127.0.0.1:8000/docs`.
+- Endpoints: `GET /health`, `POST /recommend`, `GET /app`, `/` → `/docs`.
+- Colab-friendly; ngrok uses ENV token or Cloudflare Tunnel.
 
 ---
 
